@@ -20,9 +20,9 @@ if submit:
     resp_dict = response.json()
     stats_dict = stats.json()
     if resp_dict.get('name') is None:
-        st.subheader("Player's Profile")
+        st.subheader(profile+"'s Profile")
     else:
-        st.subheader("Profile for "+resp_dict['username'])
+        st.subheader("Profile for "+resp_dict['name'])
     col1,col2,col3,col4,col5,col6 = st.columns([7,10,10,7,7,7])
     print(stats_dict)
     #st.write(stats_dict)
