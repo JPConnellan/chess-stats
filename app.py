@@ -14,4 +14,10 @@ submit = st.button('Get Profile')
 
 if submit:
     response = requests.get(API_URL, headers={"User-Agent": "karmadebjit@gmail.com"})
-    st.write(response.json())
+    resp_dict = response.json()
+    #print(resp_dict)
+    #st.write(resp_dict)
+    st.image(resp_dict['avatar'])
+    st.write(resp_dict['name'])
+    st.write(resp_dict['username'])
+    st.write(resp_dict['followers'])
