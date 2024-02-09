@@ -10,14 +10,19 @@ profile = st.text_input("Enter your chess.com username: ")
 
 API_URL= "https://api.chess.com/pub/player/"+profile
 
+STATS_URL = "https://api.chess.com/pub/player/"+profile+"/stats"
+
 submit = st.button('Get Profile')
 
 if submit:
     response = requests.get(API_URL, headers={"User-Agent": "karmadebjit@gmail.com"})
+    stats = requests.get(STATS_URL, headers={"User-Agent": "karmadebjit@gmail.com"})
     resp_dict = response.json()
-    col1,col2,col3,col4 = st.columns([4,4,4,4])
-    #print(resp_dict)
-    #st.write(resp_dict)
+    stats_dict = stats.json()
+    st.subheader("Profile for "+resp_dict['name'])
+    col1,col2,col3,col4,col5,col6 = st.columns([7,10,10,7,7,7])
+    print(resp_dict)
+    #st.write(stats_dict)
     with col1:
         st.write("Avatar")
         st.image(resp_dict['avatar'],width=70)
@@ -30,3 +35,10 @@ if submit:
     with col4:
         st.write("Friends")
         st.write(resp_dict['followers'])
+    with col5:
+        st.write("Blitz Rating")
+        st.write(stats_dict['chess_blitz']['best']['rating'])
+    with col6:
+        st.write("Rapid Rating")
+        st.write(stats_dict['chess_rapid']['best']['rating'])
+
