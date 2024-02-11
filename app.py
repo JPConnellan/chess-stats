@@ -23,8 +23,8 @@ if submit:
         st.subheader(profile+"'s Profile")
     else:
         st.subheader("Profile for "+resp_dict['name'])
-    col1,col2,col3,col4,col5,col6 = st.columns([7,10,10,7,7,7])
-    print(stats_dict)
+    col1,col2,col3,col4,col5,col6,col7 = st.columns([7,12,12,7,7,7,12])
+    print(resp_dict)
     #st.write(stats_dict)
     with col1:
         st.write("Avatar")
@@ -70,6 +70,10 @@ if submit:
                 st.write("Losses:",stats_dict.get('chess_rapid').get('record').get('loss'))
         else:
             st.write("N/A")
-
-
+    with col7:
+        st.write("League")
+        if 'league' in resp_dict:
+            st.write(resp_dict.get('league'))
+        else:
+            st.write("N/A")
 
