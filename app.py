@@ -46,18 +46,18 @@ if submit:
         st.write(resp_dict['followers'])
     with col5:
         st.write("Blitz Rating")
-        if 'chess_blitz' in stats_dict and stats_dict['chess_blitz'] is not None and stats_dict['chess_blitz']['best'] is not None:
-            st.write(stats_dict['chess_blitz']['best']['rating'])
-        elif 'chess_blitz' in stats_dict and stats_dict['chess_blitz'] is not None and stats_dict['chess_blitz']['last'] is not None:
-            st.write(stats_dict['chess_blitz']['last']['rating'])
+        if 'chess_blitz' in stats_dict and stats_dict.get('chess_blitz') is not None and stats_dict.get('chess_blitz').get('best') is not None:
+            st.write(stats_dict.get('chess_blitz').get('best').get('rating'))
+        elif 'chess_blitz' in stats_dict and stats_dict.get('chess_blitz') is not None and stats_dict.get('chess_blitz').get('last') is not None:
+            st.write(stats_dict.get('chess_blitz').get('last').get('rating'))
         else:
             st.write("N/A")
     with col6:
         st.write("Rapid Rating")
-        if 'chess_rapid' in stats_dict and stats_dict['chess_rapid'] is not None and stats_dict['chess_rapid']['best'] is not None:
-            st.write(stats_dict['chess_rapid']['best']['rating'])
-        elif 'chess_rapid' in stats_dict and stats_dict['chess_rapid'] is not None and stats_dict['chess_rapid']['last'] is not None:
-            st.write(stats_dict['chess_rapid']['last']['rating'])
+        if 'chess_rapid' in stats_dict and stats_dict.get('chess_rapid') is not None and stats_dict.get('chess_rapid').get('best') is not None:
+            st.write(stats_dict.get('chess_rapid').get('best').get('rating'))
+        elif 'chess_rapid' in stats_dict and stats_dict.get('chess_rapid') is not None and stats_dict.get('chess_rapid').get('last') is not None:
+            st.write(stats_dict.get('chess_rapid').get('last').get('rating'))
         else:
             st.write("N/A")
 
