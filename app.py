@@ -23,7 +23,7 @@ if submit:
         st.subheader(profile+"'s Profile")
     else:
         st.subheader("Profile for "+resp_dict['name'])
-    col1,col2,col3,col4,col5,col6,col7 = st.columns([7,12,12,7,7,7,12])
+    col1,col2,col3,col4,col5,col6,col7,col8 = st.columns([10,12,12,7,7,7,12,7])
     print(resp_dict)
     #st.write(stats_dict)
     with col1:
@@ -76,4 +76,9 @@ if submit:
             st.write(resp_dict.get('league'))
         else:
             st.write("N/A")
+    with col8:
+        if 'title' in resp_dict:
+            st.write("Title")
+            st.write(resp_dict.get('title'))
+
 
