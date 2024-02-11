@@ -45,19 +45,29 @@ if submit:
         st.write("Friends")
         st.write(resp_dict['followers'])
     with col5:
-        st.write("Blitz Rating")
-        if 'chess_blitz' in stats_dict and stats_dict.get('chess_blitz') is not None and stats_dict.get('chess_blitz').get('best') is not None:
-            st.write(stats_dict.get('chess_blitz').get('best').get('rating'))
-        elif 'chess_blitz' in stats_dict and stats_dict.get('chess_blitz') is not None and stats_dict.get('chess_blitz').get('last') is not None:
-            st.write(stats_dict.get('chess_blitz').get('last').get('rating'))
+        st.write("Blitz")
+        if 'chess_blitz' in stats_dict:
+            if stats_dict.get('chess_blitz') is not None and stats_dict.get('chess_blitz').get('best') is not None:
+                st.write("Rating:",stats_dict.get('chess_blitz').get('best').get('rating'))
+                st.write("Wins:",stats_dict.get('chess_blitz').get('record').get('win'))
+                st.write("Losses:",stats_dict.get('chess_blitz').get('record').get('loss'))
+            elif stats_dict.get('chess_blitz') is not None and stats_dict.get('chess_blitz').get('last') is not None:
+                st.write("Rating:",stats_dict.get('chess_blitz').get('last').get('rating'))
+                st.write("Wins:",stats_dict.get('chess_blitz').get('record').get('win'))
+                st.write("Losses:",stats_dict.get('chess_blitz').get('record').get('loss'))
         else:
             st.write("N/A")
     with col6:
-        st.write("Rapid Rating")
-        if 'chess_rapid' in stats_dict and stats_dict.get('chess_rapid') is not None and stats_dict.get('chess_rapid').get('best') is not None:
-            st.write(stats_dict.get('chess_rapid').get('best').get('rating'))
-        elif 'chess_rapid' in stats_dict and stats_dict.get('chess_rapid') is not None and stats_dict.get('chess_rapid').get('last') is not None:
-            st.write(stats_dict.get('chess_rapid').get('last').get('rating'))
+        st.write("Rapid")
+        if 'chess_rapid' in stats_dict:
+            if stats_dict.get('chess_rapid') is not None and stats_dict.get('chess_rapid').get('best') is not None:
+                st.write("Rating:",stats_dict.get('chess_rapid').get('best').get('rating'))
+                st.write("Wins:",stats_dict.get('chess_rapid').get('record').get('win'))
+                st.write("Losses:",stats_dict.get('chess_rapid').get('record').get('loss'))
+            elif stats_dict.get('chess_rapid') is not None and stats_dict.get('chess_rapid').get('last') is not None:
+                st.write("Rating:",stats_dict.get('chess_rapid').get('last').get('rating'))
+                st.write("Wins:",stats_dict.get('chess_rapid').get('record').get('win'))
+                st.write("Losses:",stats_dict.get('chess_rapid').get('record').get('loss'))
         else:
             st.write("N/A")
 
