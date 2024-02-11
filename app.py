@@ -12,20 +12,27 @@ API_URL= "https://api.chess.com/pub/player/"+profile
 
 STATS_URL = "https://api.chess.com/pub/player/"+profile+"/stats"
 
+ARCHIVE_URL = "https://api.chess.com/pub/player/"+profile+"/games/2024/02"
+
 submit = st.button('Get Profile')
 
 if submit:
     response = requests.get(API_URL, headers={"User-Agent": "karmadebjit@gmail.com"})
     stats = requests.get(STATS_URL, headers={"User-Agent": "karmadebjit@gmail.com"})
+    archive = requests.get(ARCHIVE_URL, headers={"User-Agent": "karmadebjit@gmail.com"})
+
     resp_dict = response.json()
     stats_dict = stats.json()
+    games_dict = archive.json()      
+
+    print(len(games_dict.get('games')))
+
     if resp_dict.get('name') is None:
         st.subheader(profile+"'s Profile")
     else:
-        st.subheader("Profile for "+resp_dict['name'])
-    col1,col2,col3,col4,col5,col6,col7,col8 = st.columns([10,12,12,7,7,7,12,7])
-    print(resp_dict)
-    #st.write(stats_dict)
+        st.subheader("Profile for "+resp_dict['name'])     
+    
+    col1,col2,col3,col4,col5,col6,col7,col8 = st.columns([10,12,12,10,7,7,12,7])
     with col1:
         st.write("Avatar")
         if resp_dict.get('avatar') is None:
@@ -71,14 +78,20 @@ if submit:
         else:
             st.write("N/A")
     with col7:
-        st.write("League")
         if 'league' in resp_dict:
+            st.write("League")
             st.write(resp_dict.get('league'))
-        else:
-            st.write("N/A")
     with col8:
         if 'title' in resp_dict:
             st.write("Title")
             st.write(resp_dict.get('title'))
 
+    st.subheader("Games Played this month")
+    st.write("Total: "+str(len(games_dict.get('games'))))
+    time_controls=[]
+    for game in games_dict.get('games'):
+        time_controls.append(game.get('time_control'))
+    unique_time_controls = set(time_controls)
+    for control in unique_time_controls:
+        st.write(control+"s: "+str(time_controls.count(control)))
 
