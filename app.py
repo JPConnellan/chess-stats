@@ -1,5 +1,7 @@
 import requests
 import streamlit as st
+import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 
 st.set_page_config(page_title="Chess.com Profile",page_icon="♟",
                     layout="centered",
@@ -56,12 +58,8 @@ if submit:
         if 'chess_blitz' in stats_dict:
             if stats_dict.get('chess_blitz') is not None and stats_dict.get('chess_blitz').get('best') is not None:
                 st.write("Rating:",stats_dict.get('chess_blitz').get('best').get('rating'))
-                st.write("Wins:",stats_dict.get('chess_blitz').get('record').get('win'))
-                st.write("Losses:",stats_dict.get('chess_blitz').get('record').get('loss'))
             elif stats_dict.get('chess_blitz') is not None and stats_dict.get('chess_blitz').get('last') is not None:
                 st.write("Rating:",stats_dict.get('chess_blitz').get('last').get('rating'))
-                st.write("Wins:",stats_dict.get('chess_blitz').get('record').get('win'))
-                st.write("Losses:",stats_dict.get('chess_blitz').get('record').get('loss'))
         else:
             st.write("N/A")
     with col6:
@@ -69,12 +67,8 @@ if submit:
         if 'chess_rapid' in stats_dict:
             if stats_dict.get('chess_rapid') is not None and stats_dict.get('chess_rapid').get('best') is not None:
                 st.write("Rating:",stats_dict.get('chess_rapid').get('best').get('rating'))
-                st.write("Wins:",stats_dict.get('chess_rapid').get('record').get('win'))
-                st.write("Losses:",stats_dict.get('chess_rapid').get('record').get('loss'))
             elif stats_dict.get('chess_rapid') is not None and stats_dict.get('chess_rapid').get('last') is not None:
                 st.write("Rating:",stats_dict.get('chess_rapid').get('last').get('rating'))
-                st.write("Wins:",stats_dict.get('chess_rapid').get('record').get('win'))
-                st.write("Losses:",stats_dict.get('chess_rapid').get('record').get('loss'))
         else:
             st.write("N/A")
     with col7:
@@ -85,6 +79,53 @@ if submit:
         if 'title' in resp_dict:
             st.write("Title")
             st.write(resp_dict.get('title'))
+    
+    
+    if 'chess_blitz' in stats_dict:
+        st.subheader("Blitz Wins & Losses")
+        print(stats_dict.get('chess_blitz').get('record'))
+        if stats_dict.get('chess_blitz') is not None and stats_dict.get('chess_blitz').get('record') is not None:
+            
+            labels = ['win', 'loss', 'draw']
+            games = []
+            games.append(stats_dict.get('chess_blitz').get('record').get('win'))
+            games.append(stats_dict.get('chess_blitz').get('record').get('loss'))
+            games.append(stats_dict.get('chess_blitz').get('record').get('draw'))
+
+            fig = go.Figure(
+                        go.Pie(
+                            labels = labels,
+                            values = games,
+                            hoverinfo = "label+percent",
+                            textinfo = "value"
+                ))
+            st.plotly_chart(fig)
+
+        else:
+            st.write("N/A")
+    
+    if 'chess_rapid' in stats_dict:
+        st.subheader("Rapid Wins & Losses")
+        print(stats_dict.get('chess_rapid').get('record'))
+        if stats_dict.get('chess_rapid') is not None and stats_dict.get('chess_rapid').get('record') is not None:
+           
+            labels = ['win', 'loss', 'draw']
+            games = []
+            games.append(stats_dict.get('chess_rapid').get('record').get('win'))
+            games.append(stats_dict.get('chess_rapid').get('record').get('loss'))
+            games.append(stats_dict.get('chess_rapid').get('record').get('draw'))
+
+            fig = go.Figure(
+                        go.Pie(
+                            labels = labels,
+                            values = games,
+                            hoverinfo = "label+percent",
+                            textinfo = "value"
+                    ))
+            st.plotly_chart(fig)
+
+        else:
+            st.write("N/A")
 
     st.subheader("Games Played this month")
     st.write("Total: "+str(len(games_dict.get('games'))))
@@ -94,4 +135,3 @@ if submit:
     unique_time_controls = set(time_controls)
     for control in unique_time_controls:
         st.write(control+"s: "+str(time_controls.count(control)))
-
