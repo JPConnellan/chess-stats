@@ -148,7 +148,7 @@ if submit:
     for control in unique_time_controls:
         st.write(control+"s: "+str(time_controls.count(control)))
     st.subheader("Most Played Opening of the Month")
-    st.write(get_openings(list_of_openings,ARCHIVE_URL))
+    st.write(get_openings(list_of_openings,games_dict))
     
 
     

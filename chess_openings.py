@@ -2,9 +2,7 @@ import requests
 from collections import Counter
 import re
 
-def get_openings(list_of_openings,ARCHIVE_URL):
-    response = requests.get(ARCHIVE_URL, headers={"User-Agent": "karmadebjit@gmail.com"})
-    games_dict = response.json()
+def get_openings(list_of_openings,games_dict):
     for i in range(len(games_dict['games'])):
         _str = games_dict['games'][i]['pgn']
         idx = _str.find('ECOUrl')
