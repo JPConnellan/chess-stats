@@ -2,3 +2,6 @@ requests
 streamlit
 matplotlib
 plotly
+re
+collections
+Counter
