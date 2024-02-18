@@ -21,7 +21,6 @@ def get_openings(list_of_openings,ARCHIVE_URL):
             print(most_common)
             return most_common
 
-
 def process_string(string):
     new_string = ''
     for char in string:
@@ -50,7 +49,6 @@ def remove_non_alphabet_and_replace(input_list):
         modified_string = process_string1(string)
         output_list.append(modified_string)
     return output_list
-
 
 def most_common_element(input_list):
     # Count occurrences of each element in the list
