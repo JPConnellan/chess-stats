@@ -2,6 +2,7 @@ import requests
 import streamlit as st
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
+from chess_openings import *
 
 st.set_page_config(page_title="Chess.com Profile",page_icon="♟",
                     layout="centered",
@@ -16,13 +17,14 @@ STATS_URL = "https://api.chess.com/pub/player/"+profile+"/stats"
 
 ARCHIVE_URL = "https://api.chess.com/pub/player/"+profile+"/games/2024/02"
 
+
 submit = st.button('Get Profile')
 
 if submit:
     response = requests.get(API_URL, headers={"User-Agent": "karmadebjit@gmail.com"})
     stats = requests.get(STATS_URL, headers={"User-Agent": "karmadebjit@gmail.com"})
     archive = requests.get(ARCHIVE_URL, headers={"User-Agent": "karmadebjit@gmail.com"})
-
+    
     resp_dict = response.json()
     stats_dict = stats.json()
     games_dict = archive.json()      
@@ -129,9 +131,18 @@ if submit:
 
     st.subheader("Games Played this month")
     st.write("Total: "+str(len(games_dict.get('games'))))
+    
+
+    list_of_openings=[]
     time_controls=[]
+
     for game in games_dict.get('games'):
         time_controls.append(game.get('time_control'))
     unique_time_controls = set(time_controls)
     for control in unique_time_controls:
         st.write(control+"s: "+str(time_controls.count(control)))
+    st.subheader("Most Played Opening of the Month")
+    st.write(get_openings(profile,list_of_openings))
+    
+
+    
