@@ -43,7 +43,7 @@ if submit:
     else:
         st.subheader("Profile for "+resp_dict['name'])     
     
-    col1,col2,col3,col4,col5,col6,col7,col8 = st.columns([10,12,12,10,7,7,12,7])
+    col1,col2,col3,col4,col5,col6,col7,col8 = st.columns([10,12,16,10,7,7,12,7])
     with col1:
         st.write("Avatar")
         if resp_dict.get('avatar') is None:
@@ -63,21 +63,21 @@ if submit:
         st.write("Friends")
         st.write(resp_dict['followers'])
     with col5:
-        st.write("Blitz")
+        st.write("Blitz Rating")
         if 'chess_blitz' in stats_dict:
             if stats_dict.get('chess_blitz') is not None and stats_dict.get('chess_blitz').get('best') is not None:
-                st.write("Rating:",stats_dict.get('chess_blitz').get('best').get('rating'))
+                st.write(stats_dict.get('chess_blitz').get('best').get('rating'))
             elif stats_dict.get('chess_blitz') is not None and stats_dict.get('chess_blitz').get('last') is not None:
-                st.write("Rating:",stats_dict.get('chess_blitz').get('last').get('rating'))
+                st.write(stats_dict.get('chess_blitz').get('last').get('rating'))
         else:
             st.write("N/A")
     with col6:
-        st.write("Rapid")
+        st.write("Rapid Rating")
         if 'chess_rapid' in stats_dict:
             if stats_dict.get('chess_rapid') is not None and stats_dict.get('chess_rapid').get('best') is not None:
-                st.write("Rating:",stats_dict.get('chess_rapid').get('best').get('rating'))
+                st.write(stats_dict.get('chess_rapid').get('best').get('rating'))
             elif stats_dict.get('chess_rapid') is not None and stats_dict.get('chess_rapid').get('last') is not None:
-                st.write("Rating:",stats_dict.get('chess_rapid').get('last').get('rating'))
+                st.write(stats_dict.get('chess_rapid').get('last').get('rating'))
         else:
             st.write("N/A")
     with col7:
