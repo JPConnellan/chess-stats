@@ -2,9 +2,8 @@ import requests
 from collections import Counter
 import re
 
-def get_openings(profile, list_of_openings):
-    API_URL = "https://api.chess.com/pub/player/"+profile+"/games/2024/02/"
-    response = requests.get(API_URL, headers={"User-Agent": "karmadebjit@gmail.com"})
+def get_openings(list_of_openings,ARCHIVE_URL):
+    response = requests.get(ARCHIVE_URL, headers={"User-Agent": "karmadebjit@gmail.com"})
     games_dict = response.json()
     for i in range(len(games_dict['games'])):
         _str = games_dict['games'][i]['pgn']
@@ -14,13 +13,13 @@ def get_openings(profile, list_of_openings):
         #print(str2)
         str3 = str2[str2.rindex('/')+1:]
         list_of_openings.append(str3)
-        
-    list_of_openings = remove_characters_with_number_and_replace(list_of_openings)
-    list_of_openings = remove_non_alphabet_and_replace(list_of_openings)
-    most_common = most_common_element(list_of_openings)
-    if most_common is not None:
-        print(most_common)
-        return most_common
+    if len(list_of_openings)>0:
+        list_of_openings = remove_characters_with_number_and_replace(list_of_openings)
+        list_of_openings = remove_non_alphabet_and_replace(list_of_openings)
+        most_common = most_common_element(list_of_openings)
+        if most_common is not None:
+            print(most_common)
+            return most_common
 
 
 def process_string(string):
