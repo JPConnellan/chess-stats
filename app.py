@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 from chess_openings import *
 from datetime import datetime
 
-st.set_page_config(page_title="Chess.com Profile",page_icon="♟",
+st.set_page_config(page_title="Chess.com Insights",page_icon="♟",
                     layout="centered",
                     initial_sidebar_state="collapsed")
 st.header("Chess.com Insights ♟")
