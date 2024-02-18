@@ -3,6 +3,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 from chess_openings import *
+from datetime import datetime
 
 st.set_page_config(page_title="Chess.com Profile",page_icon="♟",
                     layout="centered",
@@ -11,12 +12,18 @@ st.header("Chess.com Insights ♟")
 
 profile = st.text_input("Enter your chess.com username: ")
 
+curr_month = str(datetime.now().month)
+curr_year = str(datetime.now().year)
+if len(curr_month)<2:
+    curr_month = "0"+curr_month
+print(curr_month)
+print(curr_year)
+
 API_URL= "https://api.chess.com/pub/player/"+profile
 
 STATS_URL = "https://api.chess.com/pub/player/"+profile+"/stats"
 
-ARCHIVE_URL = "https://api.chess.com/pub/player/"+profile+"/games/2024/02"
-
+ARCHIVE_URL = "https://api.chess.com/pub/player/"+profile+"/games/"+curr_year+"/"+curr_month
 
 submit = st.button('Get Profile')
 
@@ -132,7 +139,6 @@ if submit:
     st.subheader("Games Played this month")
     st.write("Total: "+str(len(games_dict.get('games'))))
     
-
     list_of_openings=[]
     time_controls=[]
 
