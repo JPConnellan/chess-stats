@@ -2,5 +2,3 @@ requests
 streamlit
 matplotlib
 plotly
-re
-Counter
