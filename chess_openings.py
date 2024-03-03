@@ -28,7 +28,6 @@ def add_space(most_common): #add spaces to the opening name
         new_string += letter
     return new_string
 
-
 def process_string(string):
     new_string = ''
     for char in string:
