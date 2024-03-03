@@ -17,7 +17,7 @@ def get_openings(list_of_openings,games_dict):
         most_common = most_common_element(list_of_openings)
         if most_common is not None:
             most_common = add_space(most_common)
-            print(most_common)
+            #print(most_common)
             return most_common
 
 def add_space(most_common): #add spaces to the opening name

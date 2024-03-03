@@ -16,8 +16,6 @@ curr_month = str(datetime.now().month)
 curr_year = str(datetime.now().year)
 if len(curr_month)<2:
     curr_month = "0"+curr_month
-print(curr_month)
-print(curr_year)
 
 API_URL= "https://api.chess.com/pub/player/"+profile
 
@@ -92,7 +90,7 @@ if submit:
     
     if 'chess_blitz' in stats_dict:
         st.subheader("Blitz Wins & Losses")
-        print(stats_dict.get('chess_blitz').get('record'))
+        #print(stats_dict.get('chess_blitz').get('record'))
         if stats_dict.get('chess_blitz') is not None and stats_dict.get('chess_blitz').get('record') is not None:
             
             labels = ['win', 'loss', 'draw']
@@ -115,7 +113,7 @@ if submit:
     
     if 'chess_rapid' in stats_dict:
         st.subheader("Rapid Wins & Losses")
-        print(stats_dict.get('chess_rapid').get('record'))
+        #print(stats_dict.get('chess_rapid').get('record'))
         if stats_dict.get('chess_rapid') is not None and stats_dict.get('chess_rapid').get('record') is not None:
            
             labels = ['win', 'loss', 'draw']
@@ -146,7 +144,17 @@ if submit:
         time_controls.append(game.get('time_control'))
     unique_time_controls = set(time_controls)
     for control in unique_time_controls:
-        st.write(control+"s: "+str(time_controls.count(control)))
+        if str(control).find('+')==-1 and str(control).find('/')==-1:
+            st.write(str(int(int(control)/60))+" min: "+str(time_controls.count(control)))
+        elif str(control).find('/')!=-1 and str(control).find('+')==-1:
+            extra_time_games = control[control.find('/')+1:]
+            days = int(int(extra_time_games)/86400)
+            st.write(str(days)+" day(s): "+str(time_controls.count(control)))
+        elif str(control).find('+')!=-1:
+            extra_time_games = control[:control.find('+')]
+            mins_part = int(int(extra_time_games)/60)
+            sec_part = control[control.find('+')+1:]
+            st.write(str(mins_part)+" min"+"+"+str(sec_part)+" s: "+str(time_controls.count(control)))
     st.subheader("Most Played Opening of the Month")
     st.write(get_openings(list_of_openings,games_dict))
     
