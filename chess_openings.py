@@ -16,8 +16,18 @@ def get_openings(list_of_openings,games_dict):
         list_of_openings = remove_non_alphabet_and_replace(list_of_openings)
         most_common = most_common_element(list_of_openings)
         if most_common is not None:
+            most_common = add_space(most_common)
             print(most_common)
             return most_common
+
+def add_space(most_common): #add spaces to the opening name
+    new_string = ''
+    for i,letter in enumerate(most_common):
+        if i and letter.isupper():
+            new_string +=' '
+        new_string += letter
+    return new_string
+
 
 def process_string(string):
     new_string = ''
