@@ -41,7 +41,7 @@ if submit:
     else:
         st.subheader("Profile for "+resp_dict['name'])     
     
-    col1,col2,col3,col4,col5,col6,col7,col8 = st.columns([10,12,16,10,7,7,12,7])
+    col1,col2,col3,col4,col5,col6,col7,col8,col9 = st.columns([10,12,18,10,9,9,12,7,10])
     with col1:
         st.write("Avatar")
         if resp_dict.get('avatar') is None:
@@ -86,7 +86,12 @@ if submit:
         if 'title' in resp_dict:
             st.write("Title")
             st.write(resp_dict.get('title'))
-    
+    with col9:
+        if 'country' in resp_dict:
+            st.write("Country")
+            URL=resp_dict.get('country')
+            country = requests.get(URL, headers={"User-Agent": "karmadebjit@gmail.com"})
+            st.write(country.json()['name'])
     
     if 'chess_blitz' in stats_dict:
         st.subheader("Blitz Wins & Losses")
